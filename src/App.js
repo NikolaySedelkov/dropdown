@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import DropdownList from "./DropdownList.js";
 
 function App() {
+  var option = ["Profile information", "Change Password", "BecomePRO", "Help", "Log out"];
+  const [curOption, setOption] = useState(option[0]);
+  const setTitle = (localOption) => {
+      setOption(localOption);
+  }
+  const [isOpen, setOpen] = useState(false);
+  const toggleList = () =>{
+    setOpen(!isOpen);
+  } 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header"  onClick={toggleList}>
+        <span>ACOUNT SETTING</span>
+        <div className="contenier__box">
+          <div className="box"></div>
+        </div>
       </header>
-    </div>
+  
+        <DropdownList data={option} current={curOption} func={setTitle} _class={isOpen?"open":null}/>
+  
+      </div>
   );
 }
 
